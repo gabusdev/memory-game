@@ -1,8 +1,54 @@
-import React from "react";
+// import React from "react";
+// import { type } from "os";
+import { useState } from "react";
 import "./App.css";
 
+const cardImage = [
+  { src: "/img/helmet-1.png" },
+  { src: "/img/potion-1.png" },
+  { src: "/img/ring-1.png" },
+  { src: "/img/scroll-1.png" },
+  { src: "/img/shield-1.png" },
+  { src: "/img/sword-1.png" },
+];
+
+type Card = {
+  src: string;
+  id: number;
+};
+
 function App() {
-  return <div className='App'>Hello World</div>;
+  const [cards, setCards] = useState<Card[]>([]);
+  const [turns, setTurns] = useState(0);
+
+  // shuffle cards
+  const shuffleCards = () => {
+    const shuffledCards = [...cardImage, ...cardImage]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }));
+
+    setCards(shuffledCards);
+    setTurns(0);
+  };
+
+  console.log(cards, turns);
+
+  return (
+    <div className='App'>
+      <h1>Memmory Game</h1>
+      <button onClick={shuffleCards}>New Game</button>
+      <div className='card-grid'>
+        {cards.map((card) => (
+          <div className='card' key={card.id}>
+            <div>
+              <img className='front' src={card.src} alt='card front' />
+              <img className='back' src='/img/cover.png' alt='card back' />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default App;
