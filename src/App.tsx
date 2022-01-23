@@ -15,8 +15,8 @@ const cardImage = [
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
   const [turns, setTurns] = useState(0);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
+  const [choiceOne, setChoiceOne] = useState<Card | null>(null);
+  const [choiceTwo, setChoiceTwo] = useState<Card | null>(null);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -30,7 +30,7 @@ function App() {
 
   // Handle a Choice
   const handleChoice = (card: Card) => {
-    console.log(card);
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
   return (
