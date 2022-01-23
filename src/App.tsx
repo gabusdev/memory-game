@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import CardDeck from "./components/CardDeck";
+import SingleCard from "./components/SingleCard";
 import { Card } from "./types/types";
 
 const cardImage = [
@@ -61,7 +62,16 @@ function App() {
       <h1>Memmory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className='card-grid'>
-        <CardDeck cards={cards} handleChoice={handleChoice} />
+        <>
+          {cards.map((card) => (
+            <SingleCard
+              card={card}
+              key={card.id}
+              handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+            />
+          ))}
+        </>
       </div>
     </div>
   );

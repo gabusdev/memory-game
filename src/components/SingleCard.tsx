@@ -5,11 +5,13 @@ import { Card } from "../types/types";
 interface SingleCardProps {
   card: Card;
   handleChoice: Function;
+  flipped: boolean;
 }
 
 const SingleCard: FunctionComponent<SingleCardProps> = ({
   card,
   handleChoice,
+  flipped,
 }) => {
   const handleClick = () => {
     handleChoice(card);
@@ -17,7 +19,7 @@ const SingleCard: FunctionComponent<SingleCardProps> = ({
 
   return (
     <div className='card'>
-      <div>
+      <div className={flipped ? "flipped" : ""}>
         <img className='front' src={card.src} alt='card front' />
         <img
           className='back'
