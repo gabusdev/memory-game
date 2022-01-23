@@ -1,7 +1,7 @@
-// import React from "react";
-// import { type } from "os";
 import { useState } from "react";
 import "./App.css";
+import CardDeck from "./components/CardDeck";
+import { Card } from "./types/types";
 
 const cardImage = [
   { src: "/img/helmet-1.png" },
@@ -11,11 +11,6 @@ const cardImage = [
   { src: "/img/shield-1.png" },
   { src: "/img/sword-1.png" },
 ];
-
-type Card = {
-  src: string;
-  id: number;
-};
 
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -31,21 +26,12 @@ function App() {
     setTurns(0);
   };
 
-  console.log(cards, turns);
-
   return (
     <div className='App'>
       <h1>Memmory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className='card-grid'>
-        {cards.map((card) => (
-          <div className='card' key={card.id}>
-            <div>
-              <img className='front' src={card.src} alt='card front' />
-              <img className='back' src='/img/cover.png' alt='card back' />
-            </div>
-          </div>
-        ))}
+        <CardDeck cards={cards} />
       </div>
     </div>
   );
