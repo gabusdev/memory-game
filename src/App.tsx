@@ -18,6 +18,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState<Card | null>(null);
   const [choiceTwo, setChoiceTwo] = useState<Card | null>(null);
+  const [disabled, setDisabled] = useState(false);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -39,11 +40,13 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns((prevTurns) => prevTurns + 1);
+    setDisabled(false);
   };
 
   // Check if cards are iquals
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      setDisabled(true);
       if (choiceTwo.src === choiceOne.src) {
         setCards((prevCards) => {
           return prevCards.map((card) => {
@@ -62,17 +65,17 @@ function App() {
       <h1>Memmory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className='card-grid'>
-        <>
-          {cards.map((card) => (
-            <SingleCard
-              card={card}
-              key={card.id}
-              handleChoice={handleChoice}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-            />
-          ))}
-        </>
+        {cards.map((card) => (
+          <SingleCard
+            card={card}
+            key={card.id}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
+          />
+        ))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }

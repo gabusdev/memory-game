@@ -6,15 +6,17 @@ interface SingleCardProps {
   card: Card;
   handleChoice: Function;
   flipped: boolean;
+  disabled: boolean;
 }
 
 const SingleCard: FunctionComponent<SingleCardProps> = ({
   card,
   handleChoice,
   flipped,
+  disabled,
 }) => {
   const handleClick = () => {
-    handleChoice(card);
+    if (!disabled) handleChoice(card);
   };
 
   return (

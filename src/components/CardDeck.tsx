@@ -13,14 +13,14 @@ const CardDeck: FunctionComponent<CardDeckProps> = ({
 }) => {
   return (
     <>
-      {cards.map((card) => (
+      {/* {cards.map((card) => (
         <SingleCard
           card={card}
           key={card.id}
           handleChoice={handleChoice}
           flipped={false}
         />
-      ))}
+      ))} */}
     </>
   );
 };
