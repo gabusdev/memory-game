@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CardDeck from "./components/CardDeck";
+// import CardDeck from "./components/CardDeck";
 import SingleCard from "./components/SingleCard";
 import { Card } from "./types/types";
 
@@ -52,8 +52,8 @@ function App() {
               : card;
           });
         });
-      }
-      resetTurn();
+        resetTurn();
+      } else setTimeout(() => resetTurn(), 1000);
     }
   }, [choiceOne, choiceTwo]);
 
