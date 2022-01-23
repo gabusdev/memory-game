@@ -4,13 +4,17 @@ import SingleCard from "./SingleCard";
 
 interface CardDeckProps {
   cards: Card[];
+  handleChoice: Function;
 }
 
-const CardDeck: FunctionComponent<CardDeckProps> = ({ cards }) => {
+const CardDeck: FunctionComponent<CardDeckProps> = ({
+  cards,
+  handleChoice,
+}) => {
   return (
     <>
       {cards.map((card) => (
-        <SingleCard card={card} key={card.id} />
+        <SingleCard card={card} key={card.id} handleChoice={handleChoice} />
       ))}
     </>
   );

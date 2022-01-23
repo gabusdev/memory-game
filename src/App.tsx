@@ -15,6 +15,8 @@ const cardImage = [
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
   const [turns, setTurns] = useState(0);
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -26,12 +28,17 @@ function App() {
     setTurns(0);
   };
 
+  // Handle a Choice
+  const handleChoice = (card: Card) => {
+    console.log(card);
+  };
+
   return (
     <div className='App'>
       <h1>Memmory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className='card-grid'>
-        <CardDeck cards={cards} />
+        <CardDeck cards={cards} handleChoice={handleChoice} />
       </div>
     </div>
   );
