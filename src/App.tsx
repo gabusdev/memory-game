@@ -4,12 +4,12 @@ import CardDeck from "./components/CardDeck";
 import { Card } from "./types/types";
 
 const cardImage = [
-  { src: "/img/helmet-1.png" },
-  { src: "/img/potion-1.png" },
-  { src: "/img/ring-1.png" },
-  { src: "/img/scroll-1.png" },
-  { src: "/img/shield-1.png" },
-  { src: "/img/sword-1.png" },
+  { src: "/img/helmet-1.png", matched: false },
+  { src: "/img/potion-1.png", matched: false },
+  { src: "/img/ring-1.png", matched: false },
+  { src: "/img/scroll-1.png", matched: false },
+  { src: "/img/shield-1.png", matched: false },
+  { src: "/img/sword-1.png", matched: false },
 ];
 
 function App() {
@@ -44,8 +44,14 @@ function App() {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceTwo.src === choiceOne.src) {
-        console.log("they Match");
-      } else console.log("They dont match");
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            return card.src === choiceOne.src
+              ? ({ ...card, matched: true } as Card)
+              : card;
+          });
+        });
+      }
       resetTurn();
     }
   }, [choiceOne, choiceTwo]);
