@@ -26,23 +26,15 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
 
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   };
-
   // Handle a Choice
   const handleChoice = (card: Card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
-
-  // Reset choices and increase turn
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns((prevTurns) => prevTurns + 1);
-    setDisabled(false);
-  };
-
   // Check if cards are iquals
   useEffect(() => {
     if (choiceOne && choiceTwo) {
@@ -59,6 +51,17 @@ function App() {
       } else setTimeout(() => resetTurn(), 1000);
     }
   }, [choiceOne, choiceTwo]);
+  // Reset choices and increase turn
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
+    setDisabled(false);
+  };
+  // Start game automatically
+  useEffect(() => {
+    shuffleCards();
+  }, []);
 
   return (
     <div className='App'>
