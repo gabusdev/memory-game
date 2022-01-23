@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import CardDeck from "./components/CardDeck";
 import { Card } from "./types/types";
@@ -32,6 +32,23 @@ function App() {
   const handleChoice = (card: Card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
+
+  // Reset choices and increase turn
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
+  };
+
+  // Check if cards are iquals
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceTwo.src === choiceOne.src) {
+        console.log("they Match");
+      } else console.log("They dont match");
+      resetTurn();
+    }
+  }, [choiceOne, choiceTwo]);
 
   return (
     <div className='App'>
